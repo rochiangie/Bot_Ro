@@ -1,1 +1,3 @@
-pip intall request
+python-telegram-bot==13.7
+requests==2.26.0
+gunicorn==20.1.0
