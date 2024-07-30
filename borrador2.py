@@ -95,16 +95,18 @@ def button(update: Update, context: CallbackContext) -> None:
     elif option == 'piropo3':
         query.edit_message_text(text="Si fueras una lágrima, no lloraría por miedo a perderte.")
 
-def obtener_chiste() -> str:
+def obtener_chiste(update: Update, context: CallbackContext) -> None:
     headers = {
         'Accept': 'application/json'
     }
     response = requests.get("https://icanhazdadjoke.com/", headers=headers)
     if response.status_code == 200:
         data = response.json()
-        return data['joke']
+        chiste = data['joke']
     else:
-        return "No pude obtener un chiste en este momento, intenta de nuevo más tarde."
+        chiste = "No pude obtener un chiste en este momento, intenta de nuevo más tarde."
+    
+    update.message.reply_text(chiste)
 
 def piropo(update: Update, context: CallbackContext) -> None:
     # Creación del menú inline para piropos
@@ -118,7 +120,7 @@ def piropo(update: Update, context: CallbackContext) -> None:
 
 def enviar_mensaje_periodico(context: CallbackContext) -> None:
     # Aquí puedes especificar el chat_id del grupo o usuario al que enviar el mensaje
-    chat_id = "<YOUR_CHAT_ID>"
+    chat_id = "https://t.me/RochiAngie_bot"
     context.bot.send_message(chat_id=chat_id, text="Este es un mensaje automático para mantener al bot activo.")
 
 def main() -> None:
